@@ -5,8 +5,10 @@ Created on Wed Mar  7 15:37:42 2018
 @author: xuwenjie
 """
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import tensorflow as tf
+
 
 from sklearn.preprocessing import StandardScaler
 sc_x = StandardScaler()
@@ -108,10 +110,10 @@ with tf.Session() as sess1:  #tf.InteractiveSession() for use in shell
     plt.figure(figsize=(8,8))
     plt.plot(anomly_score11,'go',alpha = 0.3)
     plt.plot([split_index,split_index],[anomly_score11.min(),anomly_score11.max()], 'r')
-    plt.plot(np.where(y==1)[0],anomly_score11[np.where(y==1)],'rx')
+    c= plt.plot(np.where(y==1)[0],anomly_score11[np.where(y==1)],'rx')
     plt.title("anomly score for probability density estimation")
     plt.xlabel("day")
-
+    plt.legend(c,['threat day'],prop=matplotlib.font_manager.FontProperties(size=12),loc='upper left')
     plt.grid(True)
     plt.show()
     index = np.where(anomly_score11> -50)[0]
